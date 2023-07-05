@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const users = require('./users');
 const courses = require('./courses');
 const registeredcourses = require('./registeredcourses');
-const { Sequelize, DataTypes } = require('sequelize');
+const messages = require('./messages');
 const User = require('./Model/users-model');
 
 const app = express();
@@ -15,6 +15,7 @@ app.use(cookieParser());
 app.use('/users', users);
 app.use('/courses', courses);
 app.use('/registeredcourses', registeredcourses);
+app.use('/messages', messages);
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;

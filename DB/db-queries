@@ -24,10 +24,10 @@ CREATE TABLE RegisteredCourses (
 );
 ALTER TABLE RegisteredCourses ADD COLUMN attended BOOLEAN NOT NULL DEFAULT FALSE;
 
-CREATE TABLE Message (
+CREATE TABLE Messages (
   ID INT AUTO_INCREMENT PRIMARY KEY,
-  senderUsername INT NOT NULL,
-  receiverUsername INT NOT NULL,
+  senderUsername VARCHAR(255) NOT NULL,
+  receiverUsername VARCHAR(255) NOT NULL,
   date DATETIME NOT NULL,
   text TEXT NOT NULL
 );
