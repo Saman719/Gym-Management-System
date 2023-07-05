@@ -15,25 +15,30 @@ const User = sequelize.define('User', {
   },
   username: {
     type: DataTypes.STRING,
+    unique : true,
     allowNull: false
   },
-  pass: {
+  password: {
     type: DataTypes.STRING,
     allowNull: false
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   familyName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   shiftStart: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   shiftEnd: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  role : {
     type: DataTypes.STRING,
     allowNull: false
   }

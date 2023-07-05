@@ -1,9 +1,10 @@
 CREATE TABLE Users (
   ID INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) UNIQUE,
-  pass VARCHAR(255),
+  password VARCHAR(255),
   name VARCHAR(255),
   familyName VARCHAR(255),
   shiftStart VARCHAR(255),
-  shiftEnd VARCHAR(255)
+  shiftEnd VARCHAR(255),
+  role VARCHAR(255)
 );
