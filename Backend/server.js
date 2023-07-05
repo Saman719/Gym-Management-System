@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const users = require('./users');
 const courses = require('./courses');
+const registeredcourses = require('./registeredcourses');
 const { Sequelize, DataTypes } = require('sequelize');
 const User = require('./Model/users-model');
 
@@ -13,22 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/users', users);
 app.use('/courses', courses);
-
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'gym_management_system'
-// });
-
-// db.connect((err) => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log('Connected to database');
-// });
-
-// global.db = db;
+app.use('/registeredcourses', registeredcourses);
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;

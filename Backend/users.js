@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./Model/users-model');
+const Course = require('./Model/courses-model');
+const RegisteredCourse = require('./Model/registeredcourses-model');
 const bcrypt = require('bcryptjs');
 
 router.post('/register', async (req, res) => {
@@ -55,6 +57,64 @@ router.delete('/delete', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Failed to delete user' });
+    }
+});
+
+router.get('/trainer-members/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Find all courses taught by the trainer
+        const courses = await Course.findAll({
+            where: {
+                trainerId: id,
+            },
+        });
+
+        // Extract course IDs from courses array
+        const courseIds = courses.map((course) => course.ID);
+
+        // Find all registered courses that match the course IDs
+        const registeredCourses = await RegisteredCourse.findAll({
+            where: {
+                courseId: courseIds,
+            },
+        });
+
+        // Extract member IDs from registered courses array
+        const memberIds = registeredCourses.map((registeredCourse) => registeredCourse.memberId);
+
+        // Find all members that match the member IDs
+        const members = await User.findAll({
+            where: {
+                ID: memberIds,
+            },
+        });
+
+        // Create a new array of member/registeredCourses pairs
+        const memberRegisteredCourses = members.map((member) => {
+            // Filter the registeredCourses array to find all courses for this member
+            const memberCourses = registeredCourses.filter((registeredCourse) => registeredCourse.memberId === member.ID);
+
+            // Map the memberCourses to an array of course objects
+            const courses = memberCourses.map((registeredCourse) => {
+                return {
+                    courseId: registeredCourse.courseId,
+                    registeredCourseId: registeredCourse.ID,
+                };
+            });
+
+            // Return an object that pairs the member with their registered courses
+            return {
+                member: member.toJSON(),
+                registeredCourses: courses,
+            };
+        });
+
+        res.json(memberRegisteredCourses);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Failed to fetch trainer members' });
     }
 });
 
@@ -126,5 +186,7 @@ router.patch('/:id', async (req, res) => {
         res.status(500).json({ success: false, message: 'Failed to update user' });
     }
 });
+
+
 
 module.exports = router;
