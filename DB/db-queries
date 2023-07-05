@@ -4,7 +4,13 @@ CREATE TABLE Users (
   password VARCHAR(255),
   name VARCHAR(255),
   familyName VARCHAR(255),
-  shiftStart VARCHAR(255),
-  shiftEnd VARCHAR(255),
+  shift VARCHAR(255),
   role VARCHAR(255)
+);
+
+CREATE TABLE Courses (
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  trainerId INT,
+  FOREIGN KEY (trainerId) REFERENCES Users(ID) ON DELETE CASCADE ON UPDATE CASCADE
 );

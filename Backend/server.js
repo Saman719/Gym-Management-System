@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const users = require('./users');
+const courses = require('./courses');
 const { Sequelize, DataTypes } = require('sequelize');
 const User = require('./Model/users-model');
 
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use('/users', users);
+app.use('/courses', courses);
 
 // const db = mysql.createConnection({
 //     host: 'localhost',
