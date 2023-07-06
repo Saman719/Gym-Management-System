@@ -226,7 +226,7 @@
             })
             .catch(error => console.error(error));
 
-        sendButton.addEventListener('click', () => {
+        sendButton.addEventListener('click', async () => {
             const receiverUsername = dropdown.querySelector('span').textContent;
             const text = input.value;
 
@@ -236,7 +236,7 @@
                 text: text
             };
 
-            fetch("http://localhost:3000/messages/sendMessage", {
+            await fetch("http://localhost:3000/messages/sendMessage", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
