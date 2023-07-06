@@ -59,7 +59,7 @@ router.get('/userChats', async (req, res) => {
     }
 });
 
-router.get('/senderReceiverChats', async (req, res) => {
+router.post('/senderReceiverChats', async (req, res) => {
     const { currentUsername, otherUsername } = req.body;
 
     try {
