@@ -154,7 +154,14 @@
     </div>
 
     <script>
-        const currentUsername = "Kasra";
+        let currentUsername = '';
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            const userObj = JSON.parse(userStr);
+            currentUsername = userObj.username;
+        } else {
+            currentUsername = "Saman";
+        }
         const dropdownContent = document.getElementById("dropdown-content");
         const dropdown = document.querySelector(".dropdown");
         const input = document.querySelector('.chat-input input');
