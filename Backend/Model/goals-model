@@ -1,0 +1,34 @@
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('gym_management_system', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql'
+});
+
+const Goal = sequelize.define('Goal', {
+    ID: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    username: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
+    goal: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
+    date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    done: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    }
+}, {
+    tableName: 'Goals',
+    timestamps: false
+});
+
+module.exports = Goal

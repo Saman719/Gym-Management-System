@@ -7,6 +7,7 @@ const users = require('./users');
 const courses = require('./courses');
 const registeredcourses = require('./registeredcourses');
 const messages = require('./messages');
+const goals = require('./goals');
 const User = require('./Model/users-model');
 const cors = require('cors');
 
@@ -18,5 +19,6 @@ app.use('/users', users);
 app.use('/courses', courses);
 app.use('/registeredcourses', registeredcourses);
 app.use('/messages', messages);
+app.use('/goals', goals);
 
 app.listen(3000, () => console.log('Server listening on port 3000'));

@@ -146,7 +146,7 @@ router.get('/:id', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
     const { id } = req.params;
-    const { username, password, name, familyName, shiftStart, shiftEnd, role } = req.body;
+    const { username, password, name, familyName, shift, role } = req.body;
 
     try {
         const user = await User.findByPk(id);
@@ -167,11 +167,8 @@ router.patch('/:id', async (req, res) => {
         if (familyName) {
             user.familyName = familyName;
         }
-        if (shiftStart) {
-            user.shiftStart = shiftStart;
-        }
-        if (shiftEnd) {
-            user.shiftEnd = shiftEnd;
+        if (shift) {
+            user.shift = shift;
         }
         if (role) {
             user.role = role;
